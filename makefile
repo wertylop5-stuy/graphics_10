@@ -1,33 +1,40 @@
-OBJS = draw.o output.o matrix.o parser.o shapes.o rcs.o main.o
+OBJS = draw.o output.o matrix.o parser.o shapes.o rcs.o lighting.o vmath.o main.o
+CC = gcc
 OUTPUT = picture.ppm
 EXEC = exec
 MATH_LIB = -lm
 SCRIPT=scanline_test
 
 all: $(OBJS)
-	gcc -o $(EXEC) $(OBJS) $(MATH_LIB)
+	$(CC) -o $(EXEC) $(OBJS) $(MATH_LIB)
 	./$(EXEC) $(SCRIPT)
 
 main.o:
-	gcc $(DBG) -Wall -c main.c include/draw.h include/output.h include/rcs.h
+	$(CC) $(DBG) -Wall -c main.c include/draw.h include/output.h include/rcs.h
 
 draw.o:
-	gcc $(DBG) -Wall -c draw.c include/draw.h
+	$(CC) $(DBG) -Wall -c draw.c include/draw.h
 
 output.o:
-	gcc $(DBG) -Wall -c output.c include/output.h
+	$(CC) $(DBG) -Wall -c output.c include/output.h
 
 matrix.o:
-	gcc $(DBG) -Wall -c matrix.c include/matrix.h
+	$(CC) $(DBG) -Wall -c matrix.c include/matrix.h
 
 parser.o:
-	gcc $(DBG) -Wall -c parser.c include/parser.h 
+	$(CC) $(DBG) -Wall -c parser.c include/parser.h 
 
 shapes.o:
-	gcc $(DBG) -Wall -c shapes.c include/shapes.h
+	$(CC) $(DBG) -Wall -c shapes.c include/shapes.h
 
 rcs.o:
-	gcc $(DBG) -Wall -c rcs.c include/rcs.h
+	$(CC) $(DBG) -Wall -c rcs.c include/rcs.h
+
+lighting.o:
+	$(CC) $(DBG) -Wall -c lighting.c include/lighting.h
+
+vmath.o:
+	$(CC) $(DBG) -Wall -c vmath.c include/vmath.h
 
 clean:
 	rm -rf *.o $(OUTPUT)

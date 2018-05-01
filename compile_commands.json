@@ -1,0 +1,47 @@
+[
+    {
+        "command": "cc -c -Wall include/draw.h /home/stanley/Documents/Github/graphics_10/draw.c",
+        "directory": "/home/stanley/Documents/Github/graphics_10",
+        "file": "/home/stanley/Documents/Github/graphics_10/draw.c"
+    },
+    {
+        "command": "cc -c -Wall include/output.h /home/stanley/Documents/Github/graphics_10/output.c",
+        "directory": "/home/stanley/Documents/Github/graphics_10",
+        "file": "/home/stanley/Documents/Github/graphics_10/output.c"
+    },
+    {
+        "command": "cc -c -Wall include/matrix.h /home/stanley/Documents/Github/graphics_10/matrix.c",
+        "directory": "/home/stanley/Documents/Github/graphics_10",
+        "file": "/home/stanley/Documents/Github/graphics_10/matrix.c"
+    },
+    {
+        "command": "cc -c -Wall include/parser.h /home/stanley/Documents/Github/graphics_10/parser.c",
+        "directory": "/home/stanley/Documents/Github/graphics_10",
+        "file": "/home/stanley/Documents/Github/graphics_10/parser.c"
+    },
+    {
+        "command": "cc -c -Wall include/shapes.h /home/stanley/Documents/Github/graphics_10/shapes.c",
+        "directory": "/home/stanley/Documents/Github/graphics_10",
+        "file": "/home/stanley/Documents/Github/graphics_10/shapes.c"
+    },
+    {
+        "command": "cc -c -Wall include/rcs.h /home/stanley/Documents/Github/graphics_10/rcs.c",
+        "directory": "/home/stanley/Documents/Github/graphics_10",
+        "file": "/home/stanley/Documents/Github/graphics_10/rcs.c"
+    },
+    {
+        "command": "cc -c -Wall include/lighting.h /home/stanley/Documents/Github/graphics_10/lighting.c",
+        "directory": "/home/stanley/Documents/Github/graphics_10",
+        "file": "/home/stanley/Documents/Github/graphics_10/lighting.c"
+    },
+    {
+        "command": "cc -c -Wall include/vmath.h /home/stanley/Documents/Github/graphics_10/vmath.c",
+        "directory": "/home/stanley/Documents/Github/graphics_10",
+        "file": "/home/stanley/Documents/Github/graphics_10/vmath.c"
+    },
+    {
+        "command": "cc -c -Wall include/draw.h include/output.h include/rcs.h /home/stanley/Documents/Github/graphics_10/main.c",
+        "directory": "/home/stanley/Documents/Github/graphics_10",
+        "file": "/home/stanley/Documents/Github/graphics_10/main.c"
+    }
+]

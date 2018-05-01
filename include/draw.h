@@ -12,6 +12,7 @@
 
 #include"dimen.h"
 #include"matrix.h"
+#include"vmath.h"
 
 struct Pixel {
 	unsigned char r;
