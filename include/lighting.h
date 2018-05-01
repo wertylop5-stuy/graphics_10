@@ -30,8 +30,6 @@ struct Light* new_light(float aR, float aG, float aB,
 		float pR, float pG, float pB,
 		float x, float y, float z);
 
-void free_light(struct Light *l);
-
 //normal and view are 3 element arrays for the corresponding vector
 struct Pixel* get_lighting(struct Light *l, float *normal, float *view,
 		float aReflect, float dReflect, float sReflect);

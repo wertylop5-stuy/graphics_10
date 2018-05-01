@@ -5,7 +5,11 @@ float dot_product(float *a, float *b) {
 }
 
 void normalize(float *v) {
-
+	float mag = sqrtf(powf(v[0], 2) + powf(v[1], 2) + powf(v[2], 2));
+	
+	v[0] /= mag;
+	v[1] /= mag;
+	v[2] /= mag;
 }
 
 void find_norm(struct Matrix *m, int p1, int p2, int p3,
