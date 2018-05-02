@@ -23,25 +23,59 @@ struct Light* new_light(float aR, float aG, float aB,
 //normal and view are 3 element arrays for the corresponding vector
 struct Pixel* get_lighting(struct Light *l, float *normal, float *view,
 		float aReflect, float dReflect, float sReflect) {
-	return 0;
+	struct Pixel *a = calc_ambient(l, aReflect);
+	struct Pixel *d = calc_diffuse(l, normal, dReflect);
+	struct Pixel *s = calc_specular(l, normal, view, sReflect);
+	
+	a->r = a->r + d->r + s->r;
+	a->g = a->g + d->g + s->g;
+	a->b = a->b + d->b + s->b;
+	
+	free(d);
+	free(s);
+	
+	return a;
 }
 
 struct Pixel* calc_ambient(struct Light *l, float aReflect) {
 	struct Pixel *res = (struct Pixel *)malloc(sizeof(struct Pixel));
 
 	res->r = l->ambient_color.r * aReflect;
-	res->r = l->ambient_color.g * aReflect;
-	res->r = l->ambient_color.b * aReflect;
+	res->g = l->ambient_color.g * aReflect;
+	res->b = l->ambient_color.b * aReflect;
 	
 	return res;
 }
 
 struct Pixel* calc_diffuse(struct Light *l, float *normal, float dReflect) {
-	return 0;
+	struct Pixel *res = (struct Pixel *)malloc(sizeof(struct Pixel));
+	float dot = dot_product(normal, l->light_vector);
+	
+	res->r = l->point_color.r * dReflect * dot;
+	res->g = l->point_color.g * dReflect * dot;
+	res->b = l->point_color.b * dReflect * dot;
+	
+	return res;
 }
 
 struct Pixel* calc_specular(struct Light *l, float *normal, float *view,
 		float sReflect) {
-	return 0;
+	struct Pixel *res = (struct Pixel *)malloc(sizeof(struct Pixel));
+	float dot = dot_product(normal, l->light_vector);
+	float temp[] = {
+		normal[0]*2*dot - l->light_vector[0],
+		normal[1]*2*dot - l->light_vector[1],
+		normal[2]*2*dot - l->light_vector[2]
+	};
+	
+	dot = dot_product(temp, view);
+	
+	dot = powf(dot, 4);
+	
+	res->r = l->point_color.r * sReflect * dot;
+	res->g = l->point_color.g * sReflect * dot;
+	res->b = l->point_color.b * sReflect * dot;
+	
+	return res;
 }
 
