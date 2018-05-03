@@ -5,9 +5,9 @@ struct Light* new_light(float aR, float aG, float aB,
 		float x, float y, float z) {
 	struct Light *res = (struct Light *)malloc(sizeof(struct Light)); 
 	res->ambient_color =
-		(struct Light *)malloc(sizeof(struct Light)); 
+		(struct Pixel *)malloc(sizeof(struct Pixel)); 
 	res->point_color =
-		(struct Light *)malloc(sizeof(struct Light)); 
+		(struct Pixel *)malloc(sizeof(struct Pixel)); 
 
 	res->ambient_color->r = aR;
 	res->ambient_color->g = aG;
@@ -39,9 +39,20 @@ struct Pixel* get_lighting(struct Light *l, float *normal, float *view,
 	struct Pixel *d = calc_diffuse(l, normal, dReflect);
 	struct Pixel *s = calc_specular(l, normal, view, sReflect);
 	
+	/*
 	a->r = a->r + d->r + s->r;
 	a->g = a->g + d->g + s->g;
 	a->b = a->b + d->b + s->b;
+	*/
+	
+	a->r = fminf(a->r + d->r + s->r, 255);
+	a->g = fminf(a->g + d->g + s->g, 255);
+	a->b = fminf(a->b + d->b + s->b, 255);
+	
+	printf("r: %d, g: %d, b: %d\n", 
+		a->r,
+		a->g,
+		a->b);
 	
 	free(d);
 	free(s);

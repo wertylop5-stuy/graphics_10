@@ -15,6 +15,8 @@
 #include"vmath.h"
 #include"lighting.h"
 
+struct Light;
+
 struct Pixel {
 	unsigned char r;
 	unsigned char g;

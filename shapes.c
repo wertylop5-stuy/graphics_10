@@ -253,8 +253,8 @@ void add_cube(struct Matrix *m, float x, float y, float z,
 }
 
 void add_sphere(struct Matrix *m, float cx, float cy, float cz, float r, int step) {
-	struct Matrix *res = sphere_points(cx, cy, cz, r, 30);
-	int step_small = 180/30 + 1;
+	struct Matrix *res = sphere_points(cx, cy, cz, r, step);
+	int step_small = 180/step + 1;
 	int x;
 	
 	for (x = 0/*step_small*7*/; x < res->back/*-(step_small*2)*/; x++) {
