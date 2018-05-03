@@ -4,6 +4,10 @@ struct Light* new_light(float aR, float aG, float aB,
 		float pR, float pG, float pB,
 		float x, float y, float z) {
 	struct Light *res = (struct Light *)malloc(sizeof(struct Light)); 
+	res->ambient_color =
+		(struct Light *)malloc(sizeof(struct Light)); 
+	res->point_color =
+		(struct Light *)malloc(sizeof(struct Light)); 
 
 	res->ambient_color->r = aR;
 	res->ambient_color->g = aG;
