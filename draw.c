@@ -163,13 +163,15 @@ void draw_line(Frame grid, zbuffer buf, struct Pixel *p,
 	}
 }
 
-void draw_polygons(Frame f, zbuffer buf, struct Matrix *m, struct Pixel *p) {
+void draw_polygons(Frame f, zbuffer buf, struct Matrix *m, struct Pixel *p,
+		struct Light *l, float *view_vect) {
 	int x;
 	float norm[3];
-	struct Pixel fill_color;
-	int r = 10, g = 34, b = 123;
+	struct Pixel *fill_color;
+	//int r = 10, g = 34, b = 123;
 	for (x = 0; x < m->back; x+=3) {
 		find_norm(m, x, x+1, x+2, norm);
+		normalize(norm);
 		//backface culling: don't draw if polygon
 		//not in sight
 		if (norm[2] > 0) {
@@ -194,14 +196,15 @@ void draw_polygons(Frame f, zbuffer buf, struct Matrix *m, struct Pixel *p) {
 			);
 			*/
 			
-			pixel_color(&fill_color, r, g, b);
+			/*pixel_color(&fill_color, r, g, b);
 			r += 50;
 			g += 40;
 			b += 25;
 			r = r % 255;
 			g = g % 255;
-			b = b % 255;
-			render_scanlines(f, buf, m, &fill_color, x, x+1, x+2);
+			b = b % 255;*/
+			fill_color = get_lighting(l, norm, view_vect, .5, .5, .5);
+			render_scanlines(f, buf, m, fill_color, x, x+1, x+2);
 		}
 	}
 }

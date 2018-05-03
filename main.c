@@ -16,8 +16,6 @@ int main(int argc, char **argv) {
 	zbuffer buf;
 	clear(f, buf);
 	
-	new_light();
-	
 	struct Pixel p;
 	pixel_color(&p, 255, 235, 205);
 	

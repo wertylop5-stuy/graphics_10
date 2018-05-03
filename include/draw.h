@@ -13,6 +13,7 @@
 #include"dimen.h"
 #include"matrix.h"
 #include"vmath.h"
+#include"lighting.h"
 
 struct Pixel {
 	unsigned char r;
@@ -45,7 +46,8 @@ void pixel_color(struct Pixel *p, unsigned char r, unsigned char g, unsigned cha
 void find_norm(struct Matrix *m, int p1, int p2, int p3,
 		float *norm_out);
 
-void draw_polygons(Frame f, zbuffer buf, struct Matrix *m, struct Pixel *p);
+void draw_polygons(Frame f, zbuffer buf, struct Matrix *m, struct Pixel *p,
+		struct Light *l, float *view_vect);
 
 void render_scanlines(Frame f, zbuffer b, struct Matrix *m, struct Pixel *p,
 		int p1, int p2, int p3);

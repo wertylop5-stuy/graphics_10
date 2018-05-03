@@ -5,19 +5,27 @@ struct Light* new_light(float aR, float aG, float aB,
 		float x, float y, float z) {
 	struct Light *res = (struct Light *)malloc(sizeof(struct Light)); 
 
-	res->ambient_color.r = aR;
-	res->ambient_color.g = aG;
-	res->ambient_color.b = aB;
+	res->ambient_color->r = aR;
+	res->ambient_color->g = aG;
+	res->ambient_color->b = aB;
 	
-	res->point_color.r = pR;
-	res->point_color.g = pG;
-	res->point_color.b = pB;
+	res->point_color->r = pR;
+	res->point_color->g = pG;
+	res->point_color->b = pB;
 
 	res->light_vector[0] = x;
 	res->light_vector[1] = y;
 	res->light_vector[2] = z;
 	
+	normalize(res->light_vector);
+	
 	return res;
+}
+
+void free_light(struct Light *l) {
+	free(l->ambient_color);
+	free(l->point_color);
+	free(l);
 }
 
 //normal and view are 3 element arrays for the corresponding vector
@@ -40,9 +48,9 @@ struct Pixel* get_lighting(struct Light *l, float *normal, float *view,
 struct Pixel* calc_ambient(struct Light *l, float aReflect) {
 	struct Pixel *res = (struct Pixel *)malloc(sizeof(struct Pixel));
 
-	res->r = l->ambient_color.r * aReflect;
-	res->g = l->ambient_color.g * aReflect;
-	res->b = l->ambient_color.b * aReflect;
+	res->r = l->ambient_color->r * aReflect;
+	res->g = l->ambient_color->g * aReflect;
+	res->b = l->ambient_color->b * aReflect;
 	
 	return res;
 }
@@ -51,9 +59,9 @@ struct Pixel* calc_diffuse(struct Light *l, float *normal, float dReflect) {
 	struct Pixel *res = (struct Pixel *)malloc(sizeof(struct Pixel));
 	float dot = dot_product(normal, l->light_vector);
 	
-	res->r = l->point_color.r * dReflect * dot;
-	res->g = l->point_color.g * dReflect * dot;
-	res->b = l->point_color.b * dReflect * dot;
+	res->r = l->point_color->r * dReflect * dot;
+	res->g = l->point_color->g * dReflect * dot;
+	res->b = l->point_color->b * dReflect * dot;
 	
 	return res;
 }
@@ -72,9 +80,9 @@ struct Pixel* calc_specular(struct Light *l, float *normal, float *view,
 	
 	dot = powf(dot, 4);
 	
-	res->r = l->point_color.r * sReflect * dot;
-	res->g = l->point_color.g * sReflect * dot;
-	res->b = l->point_color.b * sReflect * dot;
+	res->r = l->point_color->r * sReflect * dot;
+	res->g = l->point_color->g * sReflect * dot;
+	res->b = l->point_color->b * sReflect * dot;
 	
 	return res;
 }

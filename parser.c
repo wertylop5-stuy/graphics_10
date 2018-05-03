@@ -13,6 +13,9 @@ void parse_instructions(char *filename, struct Rcs_stack *s, Frame f, zbuffer b)
 	struct Pixel pixel;
 	pixel_color(&pixel, 255, 105, 180);
 	
+	struct Light *l = new_light(30, 30, 30, 0, 255, 0, 1, 1, 1);
+	float view_vect[] = {0, 0, 1};
+	
 	while (fgets(line, sizeof(line), file) != 0 && line[0] != '\n') {
 		if (!strncmp(line, "line", strlen(line)-1)) {
 			struct Matrix *e = new_matrix(4, 1);
@@ -131,7 +134,7 @@ void parse_instructions(char *filename, struct Rcs_stack *s, Frame f, zbuffer b)
 			//draw sphere then remove the matrix
 			add_sphere(p, x, y, z, r, 8);
 			matrix_mult(peek(s), p);
-			draw_polygons(f, b, p, &pixel);
+			draw_polygons(f, b, p, &pixel, l, view_vect);
 			free_matrix(p);
 		}
 		else if (!strncmp(line, "box", strlen(line)-1)) {
@@ -144,7 +147,7 @@ void parse_instructions(char *filename, struct Rcs_stack *s, Frame f, zbuffer b)
 			
 			add_cube(p, x, y, z, w, h, d);
 			matrix_mult(peek(s), p);
-			draw_polygons(f, b, p, &pixel);
+			draw_polygons(f, b, p, &pixel, l, view_vect);
 			free_matrix(p);
 		}
 		else if (!strncmp(line, "torus", strlen(line)-1)) {
@@ -157,7 +160,7 @@ void parse_instructions(char *filename, struct Rcs_stack *s, Frame f, zbuffer b)
 			
 			add_torus(p, x, y, z, r1, r2, 30);
 			matrix_mult(peek(s), p);
-			draw_polygons(f, b, p, &pixel);
+			draw_polygons(f, b, p, &pixel, l, view_vect);
 			free_matrix(p);
 		}
 		else if (!strncmp(line, "push", strlen(line)-1)) {
@@ -171,6 +174,7 @@ void parse_instructions(char *filename, struct Rcs_stack *s, Frame f, zbuffer b)
 		}
 	}
 	
+	free_light(l);
 	fclose(file);
 	file = 0;
 }

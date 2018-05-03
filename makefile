@@ -3,7 +3,7 @@ CC = gcc
 OUTPUT = picture.ppm
 EXEC = exec
 MATH_LIB = -lm
-SCRIPT=scanline_test
+SCRIPT=face
 
 all: $(OBJS)
 	$(CC) -o $(EXEC) $(OBJS) $(MATH_LIB)

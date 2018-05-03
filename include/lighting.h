@@ -14,9 +14,9 @@
 
 //ambient, diffuse, specular
 struct Light {
-	struct Pixel ambient_color;
-	struct Pixel point_color;
-
+	struct Pixel *ambient_color;
+	struct Pixel *point_color;
+	
 	//location of the point light source
 	float light_vector[3];
 };
@@ -29,6 +29,8 @@ struct Light {
 struct Light* new_light(float aR, float aG, float aB,
 		float pR, float pG, float pB,
 		float x, float y, float z);
+
+void free_light(struct Light *l);
 
 //normal and view are 3 element arrays for the corresponding vector
 struct Pixel* get_lighting(struct Light *l, float *normal, float *view,
