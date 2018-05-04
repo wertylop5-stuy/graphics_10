@@ -158,7 +158,7 @@ void parse_instructions(char *filename, struct Rcs_stack *s, Frame f, zbuffer b)
 			sscanf(line, "%f %f %f %f %f",
 				      &x, &y, &z, &r1, &r2);
 			
-			add_torus(p, x, y, z, r1, r2, 12);
+			add_torus(p, x, y, z, r1, r2, 15);
 			matrix_mult(peek(s), p);
 			draw_polygons(f, b, p, &pixel, l, view_vect);
 			free_matrix(p);
