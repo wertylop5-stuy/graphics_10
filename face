@@ -27,6 +27,4 @@ rotate
 z 5
 torus
 0 0 0 40 125
-box
--80 100 0 75 75 75
 display
