@@ -174,7 +174,9 @@ void draw_polygons(Frame f, zbuffer buf, struct Matrix *m, struct Pixel *p,
 		normalize(norm);
 		//backface culling: don't draw if polygon
 		//not in sight
+		printf("~~~~~~~~~~~~~~~~~~~~\n");
 		if (norm[2] > 0) {
+			printf("%f, %f, %f\n", norm[0], norm[1], norm[2]);
 			/*
 			draw_line(f, p,
 				m->m[0][x],

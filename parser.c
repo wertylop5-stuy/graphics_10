@@ -13,7 +13,7 @@ void parse_instructions(char *filename, struct Rcs_stack *s, Frame f, zbuffer b)
 	struct Pixel pixel;
 	pixel_color(&pixel, 255, 105, 180);
 	
-	struct Light *l = new_light(0, 0, 0, 0, 255, 0, 1, 1, 1);
+	struct Light *l = new_light(60, 60, 60, 0, 255, 0, 1, 1, 1);
 	float view_vect[] = {0, 0, 1};
 	
 	while (fgets(line, sizeof(line), file) != 0 && line[0] != '\n') {
@@ -132,7 +132,7 @@ void parse_instructions(char *filename, struct Rcs_stack *s, Frame f, zbuffer b)
 				      &x, &y, &z, &r);
 			
 			//draw sphere then remove the matrix
-			add_sphere(p, x, y, z, r, 10);
+			add_sphere(p, x, y, z, r, 20);
 			matrix_mult(peek(s), p);
 			draw_polygons(f, b, p, &pixel, l, view_vect);
 			free_matrix(p);
@@ -158,7 +158,7 @@ void parse_instructions(char *filename, struct Rcs_stack *s, Frame f, zbuffer b)
 			sscanf(line, "%f %f %f %f %f",
 				      &x, &y, &z, &r1, &r2);
 			
-			add_torus(p, x, y, z, r1, r2, 10);
+			add_torus(p, x, y, z, r1, r2, 20);
 			matrix_mult(peek(s), p);
 			draw_polygons(f, b, p, &pixel, l, view_vect);
 			free_matrix(p);
