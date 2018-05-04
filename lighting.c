@@ -46,9 +46,9 @@ struct Pixel* get_lighting(struct Light *l, float *normal, float *view,
 	*/
 	
 	
-	a->r = fminf(a->r /*+ d->r */+ s->r, 255);
-	a->g = fminf(a->g /*+ d->g */+ s->g, 255);
-	a->b = fminf(a->b /*+ d->b */+ s->b, 255);
+	a->r = fminf(a->r + d->r /*+ s->r*/, 255);
+	a->g = fminf(a->g + d->g /*+ s->g*/, 255);
+	a->b = fminf(a->b + d->b /*+ s->b*/, 255);
 	
 	
 	/*
